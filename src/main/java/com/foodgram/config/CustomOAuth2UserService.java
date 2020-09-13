@@ -3,7 +3,7 @@ package com.foodgram.config;
 import com.foodgram.domain.OAuthAttributes;
 import com.foodgram.domain.SessionUser;
 import com.foodgram.domain.User;
-import com.foodgram.domain.UserRepository;
+import com.foodgram.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
