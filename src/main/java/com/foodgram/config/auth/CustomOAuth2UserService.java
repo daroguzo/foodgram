@@ -1,7 +1,7 @@
-package com.foodgram.config;
+package com.foodgram.config.auth;
 
-import com.foodgram.domain.OAuthAttributes;
-import com.foodgram.domain.SessionUser;
+import com.foodgram.config.dto.OAuthAttributes;
+import com.foodgram.config.dto.SessionUser;
 import com.foodgram.domain.User;
 import com.foodgram.user.UserRepository;
 import lombok.RequiredArgsConstructor;

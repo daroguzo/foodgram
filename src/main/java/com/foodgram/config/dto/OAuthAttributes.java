@@ -1,5 +1,7 @@
-package com.foodgram.domain;
+package com.foodgram.config.dto;
 
+import com.foodgram.domain.Role;
+import com.foodgram.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 

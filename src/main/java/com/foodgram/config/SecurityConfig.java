@@ -1,12 +1,12 @@
 package com.foodgram.config;
 
+import com.foodgram.config.auth.CustomOAuth2UserService;
 import com.foodgram.domain.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.client.userinfo.CustomUserTypesOAuth2UserService;
 
 @Configuration
 @EnableWebSecurity
