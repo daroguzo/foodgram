@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
 <body>
-    <h1>Index Page</h1>
+    <h1>foodgram</h1>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글 번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr th:each="post, i: ${post}">
+            <td th:text="${post[i].id}"></td>
+            <td th:text="${post[i].title}"><a href="/posts/update/{{id}}"></a></td>
+            <td th:text="${post[i].author}"></td>
+            <td th:text="${post[i].modifiedDate}"></td>
+        </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+    <footer th:replace="fragments.html :: footer"></footer>
 </body>
 </html>

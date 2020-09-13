@@ -1,13 +1,36 @@
 package com.foodgram.main;
 
+import com.foodgram.post.PostResponseDto;
+import com.foodgram.post.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
+@RequiredArgsConstructor
 @Controller
 public class MainController {
 
+    private final PostService postService;
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("post", postService.findAllDesc());
         return "index";
+    }
+
+    @GetMapping("/post/save")
+    public String postsSave() {
+        return "post-save";
+    }
+
+    @GetMapping("/posts/update/{id}")
+    public String postsUpdate(@PathVariable Long id, Model model){
+
+        PostResponseDto dto = postService.findById(id);
+        model.addAttribute("post", dto);
+
+        return "post-update";
     }
 }
