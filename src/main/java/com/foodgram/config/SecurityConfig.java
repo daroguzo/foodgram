@@ -13,21 +13,26 @@ import org.springframework.security.oauth2.client.userinfo.CustomUserTypesOAuth2
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CustomUserTypesOAuth2UserService oAuth2UserService;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().permitAll();
-        http.authorizeRequests()
-                .mvcMatchers("/", "login", "sign-up", "/css/**", "/images/**", "/js/**").permitAll()
-                .mvcMatchers("api/v1/**").hasRole(Role.USER.name())
+        http.csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/", "/css/**", "/images/**",
+                        "/js/**", "/h2-console/**").permitAll()
+                .antMatchers("/api/v1/**").hasRole(Role.
+                        USER.name())
                 .anyRequest().authenticated()
-                    .and()
-                        .logout()
-                            .logoutSuccessUrl("/")
-                    .and()
-                        .oauth2Login()
-                            .userInfoEndpoint()
-                                .userService(oAuth2UserService);
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
     }
 }
