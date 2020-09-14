@@ -1,28 +1,34 @@
 package com.foodgram.post;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class PostApiController {
 
     private final PostService postService;
 
-    @PostMapping("/api/v1/posts")
+    @PostMapping("/api/v1/post")
     public Long save(@RequestBody PostSaveRequestDto requestDto) {
 
         return postService.save(requestDto);
     }
 
-    @GetMapping("/api/v1/posts/{id}")
+    @PutMapping("/api/v1/post/{id}")
+    public Long update(@PathVariable Long id, @RequestBody
+            PostUpdateRequestDto requestDto) {
+
+        return postService.update(id, requestDto);
+    }
+
+    @GetMapping("/api/v1/post/{id}")
     public PostResponseDto findById (@PathVariable Long id) {
 
         return postService.findById(id);
     }
 
-    @DeleteMapping("/api/v1/posts/{id}")
+    @DeleteMapping("/api/v1/post/{id}")
     public Long delete(@PathVariable Long id) {
         postService.delete(id);
         return id;
