@@ -1,5 +1,6 @@
 package com.foodgram.main;
 
+import com.foodgram.config.auth.LoginUser;
 import com.foodgram.config.dto.SessionUser;
 import com.foodgram.post.PostResponseDto;
 import com.foodgram.post.PostService;
@@ -19,10 +20,8 @@ public class MainController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("post", postService.findAllDesc());
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if(user != null){
             model.addAttribute("userName", user.getName());
