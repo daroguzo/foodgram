@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 public class MainController {
 
     private final PostService postService;
-    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
