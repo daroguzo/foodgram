@@ -7,6 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <title>foodgram</title>
+    <style>
+        footer{
+            background-color: gainsboro;
+        }
+    </style>
 </head>
 
 <nav th:fragment="navbar" class="navbar navbar-default">
@@ -42,7 +47,7 @@
                         <li><a href="#">지역 찾기</a></li>
                         <li><a href="#">음식 찾기</a> </li>
                         <li class="divider"></li>
-                        <li><a href="#">로그아웃</a></li>
+                        <li><a href="/logout">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -50,7 +55,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<footer th:fragment="footer" class="container-fluid navbar-fixed-bottom bg-info">
+<footer th:fragment="footer" class="container-fluid navbar-fixed-bottom active">
     <div class="text-center">
         <small>© 2020 Copyright:</small>
         <a href="https://github.com/daroguzo"> daroguzo</a>
