@@ -14,4 +14,10 @@ public class MapController {
         return "map";
     }
 
+    @GetMapping("/findMap")
+    public String getFindMap() {
+
+        return "findMap";
+    }
+
 }
