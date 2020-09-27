@@ -4,24 +4,7 @@
 <head th:replace="fragments.html :: head"></head>
 <body>
     <nav th:replace="fragments.html :: navbar"></nav>
-    <h1>foodgram</h1>
-    <div class="col-md-12">
-        <!--로그인 기능 영역-->
-        <div class="row">
-            <div class="col-md-6">
-                <a th:href="@{/post/save}" role="button" class="btn btn-primary">글 등록</a>
-                <span th:if="${userName}">
-                    Logged in as : <span id="user" th:text="${userName}"></span>
-                    <a th:href="@{/logout}" class="btn btn-info active" role="button">Logout</a>
-                </span>
-                <span th:unless="${userName}">
-                    <a th:href="@{/oauth2/authorization/google}" class="btn btn-secondary active" role="button">Google Login</a>
-                    <a th:href="@{/oauth2/authorization/naver}" class="btn btn-success active" role="button">Naver Login</a>
-                </span>
-            </div>
-        </div>
-    </div>
-    <br>
+
     <!-- 목록 출력 영역 -->
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
@@ -41,6 +24,7 @@
         </tr>
         </tbody>
     </table>
+
     <footer th:replace="fragments.html :: footer"></footer>
 </body>
 </html>
