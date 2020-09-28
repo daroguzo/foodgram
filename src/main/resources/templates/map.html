@@ -20,7 +20,16 @@
         <div id="map" style="width:100%;height:100vh;"></div>
     </div>
 
-    <script type="text/javascript" src="/js/app/data.js"></script>
+    <script type="text/javascript" src="/js/data.js"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        var message = /*[[${message}]]*/ 'default';
+        alert(message);
+
+        /*]]>*/
+    </script>
 
     <script>
         var mapOptions = {
@@ -69,7 +78,7 @@
             naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
         }
 
-        // map 클릭 시 해당 marke가 열어 놓은 infowindow를 찾아서 닫아줌
+        // map 클릭 시 해당 marker가 열어 놓은 infowindow를 찾아서 닫아줌
         function ClickMap(i) {
             return function () {
                 var infowindow = infowindowList[i];
