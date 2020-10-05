@@ -28,6 +28,8 @@
         var message = /*[[${message}]]*/ 'default';
         alert(message);
 
+        var mapList = /*[[${mapList}]]*/ [];
+
         /*]]>*/
     </script>
 
@@ -42,8 +44,8 @@
         var infowindowList = [];
 
         // data.js에서 저장된 marker 가져오기
-        for (var i in data) {
-            var target = data[i];
+        for (var i in mapList) {
+            var target = mapList[i];
             var latlng = new naver.maps.LatLng(target.lat, target.lng);
             marker = new naver.maps.Marker({
                 map: map,

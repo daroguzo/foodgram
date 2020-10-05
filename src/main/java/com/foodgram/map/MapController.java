@@ -1,9 +1,13 @@
 package com.foodgram.map;
 
+import com.foodgram.domain.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -16,6 +20,26 @@ public class MapController {
     public String getMap(Model model) {
 
         model.addAttribute("message", "hello");
+        Map map = Map.builder()
+                .title("서울")
+                .content("경복궁")
+                .date("2019-03-20")
+                .lat(37.579763)
+                .lng(126.977000)
+                .build();
+
+        Map map2 = Map.builder()
+                .title("서울")
+                .content("창경궁")
+                .date("2020-11-24")
+                .lat(37.578932)
+                .lng(126.994795)
+                .build();
+
+        List<Map> mapList = new ArrayList<>();
+        mapList.add(map);
+        mapList.add(map2);
+        model.addAttribute("mapList", mapList);
         return "map";
     }
 
