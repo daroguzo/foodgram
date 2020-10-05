@@ -43,7 +43,7 @@
         var markerList = [];
         var infowindowList = [];
 
-        // data.js에서 저장된 marker 가져오기
+        // mapList에서 저장된 marker 가져오기
         for (var i in mapList) {
             var target = mapList[i];
             var latlng = new naver.maps.LatLng(target.lat, target.lng);
@@ -80,7 +80,7 @@
             naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
         }
 
-        // map 클릭 시 해당 marker가 열어 놓은 infowindow를 찾아서 닫아줌
+        // map 클릭 시 해당 marke가 열어 놓은 infowindow를 찾아서 닫아줌
         function ClickMap(i) {
             return function () {
                 var infowindow = infowindowList[i];
@@ -159,7 +159,7 @@
 
 
         // data > 결과, status > kakao 서버 상태, pagination 검색 결과가 얼마나 있는 지 번호를 통해 앎
-        function placeSearchCB(data, status, pagination) {
+        function placeSearchCB(data, status, pagination) {``
             if (status === kakao.maps.services.Status.OK) {
                 let target = data[0];
                 // let target = data;

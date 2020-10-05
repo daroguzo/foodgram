@@ -1,5 +1,7 @@
 package com.foodgram.map;
 
+import com.foodgram.config.auth.LoginUser;
+import com.foodgram.config.dto.SessionUser;
 import com.foodgram.domain.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,8 +18,13 @@ public class MapController {
     private final MapRepository mapRepository;
     private final MapService mapService;
 
-    @GetMapping("/map")
-    public String getMap(Model model) {
+    @GetMapping("/userMap")
+    public String getUserMap(Model model, @LoginUser SessionUser user) {
+
+        // login user
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
 
         model.addAttribute("message", "hello");
         Map map = Map.builder()
@@ -40,13 +47,18 @@ public class MapController {
         mapList.add(map);
         mapList.add(map2);
         model.addAttribute("mapList", mapList);
-        return "map";
+        return "map/userMap";
     }
 
     @GetMapping("/findMap")
-    public String getFindMap() {
+    public String getFindMap(Model model, @LoginUser SessionUser user) {
 
-        return "findMap";
+        // login user
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "map/findMap";
     }
 
 }
