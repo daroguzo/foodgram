@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MapController {
 
+    private final MapRepository mapRepository;
+    private final MapService mapService;
+
     @GetMapping("/map")
     public String getMap(Model model) {
 
