@@ -11,9 +11,33 @@
 <!--    </div>-->
     <div class="container-fluid">
         <div id="search">
-            <input id="search_input" placeholder="목적지를 입력해주세요"/>
+            <label class="sr-only" for="search_input">장소</label>
+            <input id="search_input" placeholder="장소를 입력해주세요"/>
             <button id="search_button" class="btn btn-default">검색</button>
-            <button id="submit_button" class="btn btn-primary">추가</button>
+            <form id="mapForm" th:action="@{/findMap}" th:object="${mapForm}" th:method="post">
+                <div class="form-group">
+                    <label class="sr-only" for="title">지역</label>
+                    <input type="hidden" id="title" class="form-control" th:field="*{title}">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="content">장소이름</label>
+                    <input type="hidden" id="content" class="form-control" th:field="*{content}">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="date">날짜</label>
+                    <input type="hidden" id="date" class="form-control" th:field="*{date}" value="2020-10-08">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="lat">위도</label>
+                    <input type="hidden" id="lat" class="form-control" th:field="*{lat}">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="lng">경도</label>
+                    <input type="hidden" id="lng" class="form-control" th:field="*{lng}">
+                </div>
+<!--                <button id="submit_button" class="btn btn-primary">추가</button>-->
+                <button type="submit" class="btn btn-default">제출</button>
+            </form>
         </div>
 
         <div id="current">현재 위치</div>
@@ -70,7 +94,7 @@
             naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
         }
 
-        // map 클릭 시 해당 marke가 열어 놓은 infowindow를 찾아서 닫아줌
+        // map 클릭 시 해당 marker가 열어 놓은 infowindow를 찾아서 닫아줌
         function ClickMap(i) {
             return function () {
                 var infowindow = infowindowList[i];
@@ -151,7 +175,9 @@
         $("#submit_button").on("click", function (e) {
             let content = $("#search_input").val();
 
-            // TODO
+            // content로 api 요청, 결과물 > placeSubmitForm()를 통해 Post 요청
+            ps.keywordSearch(content, placeSubmitCB)
+            // document.getElementById('mapForm').submit();
         })
 
 
@@ -164,6 +190,8 @@
                 console.log(target);
                 const lat = target.y;
                 const lng = target.x;
+                const address_name = target.address_name;
+                const place_name = target.place_name;
                 const latlng = new naver.maps.LatLng(lat, lng);
                 marker = new naver.maps.Marker({
                     position: latlng,
@@ -181,10 +209,40 @@
                 map.setZoom(14, false);
                 map.panTo(latlng);
 
+                document.getElementById('title').value = address_name;
+                document.getElementById('content').value = place_name;
+                document.getElementById('lat').value = lat;
+                document.getElementById('lng').value = lng;
+
             } else {
                 alert("검색 결과가 없습니다.");
             }
         }
+
+        // // 검색된 데이터를 바탕으로 form submit
+        // function placeSubmitCB(data, status, pagination) {``
+        //     if (status === kakao.maps.services.Status.OK) {
+        //         let target = data[0];
+        //         // let target = data;
+        //         // 데이터 배열 확인
+        //         console.log(target);
+        //         const address_name = target.address_name;
+        //         const place_name = target.place_name;
+        //         const lat = target.y;
+        //         const lng = target.x;
+        //         if (search_arr.length == 0) {
+        //             search_arr.push(marker);
+        //             // 이전 검색 결과 삭제
+        //         }
+        //         // document.getElementById('title').value = address_name;
+        //         // document.getElementById('content').value = place_name;
+        //         // document.getElementById('lat').value = lat;
+        //         // document.getElementById('lng').value = lng;
+        //
+        //     } else {
+        //         alert("검색 결과가 없습니다.");
+        //     }
+        // }
     </script>
     <footer th:replace="fragments.html :: footer"></footer>
 </body>
