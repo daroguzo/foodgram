@@ -12,7 +12,8 @@
     <div class="container-fluid">
         <div id="search">
             <input id="search_input" placeholder="목적지를 입력해주세요"/>
-            <button id="search_button">검색</button>
+            <button id="search_button" class="btn btn-default">검색</button>
+            <button id="submit_button" class="btn btn-primary">추가</button>
         </div>
 
         <div id="current">현재 위치</div>
@@ -146,6 +147,13 @@
             ps.keywordSearch(content, placeSearchCB)
         })
 
+        // 검색한 지역 form 추가 하기
+        $("#submit_button").on("click", function (e) {
+            let content = $("#search_input").val();
+
+            // TODO
+        })
+
 
         // data > 결과, status > kakao 서버 상태, pagination 검색 결과가 얼마나 있는 지 번호를 통해 앎
         function placeSearchCB(data, status, pagination) {``
@@ -153,7 +161,7 @@
                 let target = data[0];
                 // let target = data;
                 // 데이터 배열 확인
-                // console.log(target);
+                console.log(target);
                 const lat = target.y;
                 const lng = target.x;
                 const latlng = new naver.maps.LatLng(lat, lng);
