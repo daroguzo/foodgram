@@ -31,25 +31,8 @@ public class MapController {
         }
 
         model.addAttribute("message", "hello");
-        Map map = Map.builder()
-                .title("서울")
-                .content("경복궁")
-                .date("2019-03-20")
-                .lat(37.579763)
-                .lng(126.977000)
-                .build();
-
-        Map map2 = Map.builder()
-                .title("서울")
-                .content("창경궁")
-                .date("2020-11-24")
-                .lat(37.578932)
-                .lng(126.994795)
-                .build();
 
         List<Map> mapList = new ArrayList<>();
-        mapList.add(map);
-        mapList.add(map2);
         model.addAttribute("mapList", mapList);
         return "map/userMap";
     }
@@ -79,10 +62,10 @@ public class MapController {
         System.out.println(mapForm.getTitle());
 
 //        redirectAttributes.addFlashAttribute(mapForm);
-        redirectAttributes.addFlashAttribute("title", mapForm.getTitle());
-        redirectAttributes.addFlashAttribute("content", mapForm.getContent());
-        redirectAttributes.addFlashAttribute("lat", mapForm.getLat());
-        redirectAttributes.addFlashAttribute("lng", mapForm.getLng());
+        redirectAttributes.addAttribute("title", mapForm.getTitle());
+        redirectAttributes.addAttribute("content", mapForm.getContent());
+        redirectAttributes.addAttribute("lat", mapForm.getLat());
+        redirectAttributes.addAttribute("lng", mapForm.getLng());
 
         return "redirect:/mapForm";
     }
@@ -104,6 +87,20 @@ public class MapController {
         model.addAttribute("lng", lng);
 
         return "map/mapForm";
+    }
+
+    @PostMapping("/mapForm")
+    public String postMapForm(Model model, @LoginUser SessionUser user,
+                              MapForm mapForm) {
+
+        // login user
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
+        mapService.processNewMap(mapForm);
+
+        return "redirect:/userMap";
     }
 
 }
