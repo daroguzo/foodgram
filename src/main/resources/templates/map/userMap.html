@@ -20,16 +20,11 @@
         <div id="map" style="width:100%;height:100vh;"></div>
     </div>
 
-    <script type="text/javascript" src="/js/data.js"></script>
+<!--    <script type="text/javascript" src="/js/data.js"></script>-->
 
     <script th:inline="javascript">
         /*<![CDATA[*/
-
-        var message = /*[[${message}]]*/ 'default';
-        alert(message);
-
         var mapList = /*[[${mapList}]]*/ [];
-
         /*]]>*/
     </script>
 
@@ -59,7 +54,6 @@
             var content = `<div class='infowindow_wrap'>
             <div class='infowindow_title'>${target.title}</div>
             <div class='infowindow_content'>${target.content}</div>
-            <div class='infowindow_date'>${target.date}</div>
               </div>`
 
             var infowindow = new naver.maps.InfoWindow({

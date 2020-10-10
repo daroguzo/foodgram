@@ -4,9 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -15,6 +13,10 @@ public class Map {
 
     @Id @GeneratedValue
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String title;
 
@@ -27,7 +29,8 @@ public class Map {
     private Double lng;
 
     @Builder
-    public Map(String title, String content, String date, Double lat, Double lng) {
+    public Map(User user, String title, String content, String date, Double lat, Double lng) {
+        this.user = user;
         this.title = title;
         this.content = content;
         this.date = date;

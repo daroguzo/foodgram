@@ -2,9 +2,13 @@ package com.foodgram.user;
 
 import com.foodgram.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+
+    @Query("select a from User a where a.email = ?1")
+    User findByEmail2(String email);
 }

@@ -8,6 +8,10 @@
     <div class="container-fluid">
         <form id="mapForm" th:action="@{/mapForm}" th:object="${mapForm}" th:method="post">
             <div class="form-group">
+                <label for="userEmail">사용자 이메일</label>
+                <input type="hidden" id="userEmail" class="form-control" name="userEmail" th:value="${userEmail}">
+            </div>
+            <div class="form-group">
                 <label for="title">지역</label>
                 <input type="text" id="title" class="form-control" name="title" th:value="${title}">
             </div>

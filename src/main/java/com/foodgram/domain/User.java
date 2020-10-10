@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -22,6 +24,9 @@ public class User extends BaseTimeEntity{
     private String email;
 
     private String picture;
+
+    @OneToMany(mappedBy = "user")
+    private List<Map> mapList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

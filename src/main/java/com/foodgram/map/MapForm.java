@@ -5,11 +5,13 @@ import lombok.Data;
 @Data
 public class MapForm {
 
+    private String userEmail;
+
     private String title;
 
     private String content;
 
-    private String date = "2020-10-08";
+    private String date;
 
     private Double lat;
 
