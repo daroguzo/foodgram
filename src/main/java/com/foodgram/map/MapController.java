@@ -32,11 +32,15 @@ public class MapController {
         // login user
         if(user != null){
             model.addAttribute("userName", user.getName());
+            User nowUser = userRepository.findByEmail(user.getEmail()).orElseThrow(IllegalArgumentException::new);
+            List<Map> userMap = mapRepository.findByUser(nowUser);
+            List<Map> mapList = mapService.replaceMap(userMap);
+            model.addAttribute("mapList", mapList);
         }
 
 //        List<Map> mapList = mapService.getUserMapList(user.getEmail());
 
-        List<Map> mapList = mapRepository.findAll();
+//        List<Map> mapList = mapRepository.findByUser(nowUser);
 //        List<Map> mapList = new ArrayList<>();
 
 //        Map map = Map.builder()
@@ -56,8 +60,6 @@ public class MapController {
 //
 //        mapList.add(map);
 //        mapList.add(map2);
-
-        model.addAttribute("mapList", mapList);
         return "map/userMap";
     }
 
@@ -106,7 +108,6 @@ public class MapController {
         model.addAttribute("content", content);
         model.addAttribute("lat", lat);
         model.addAttribute("lng", lng);
-        model.addAttribute("userEmail", user.getEmail());
 
         return "map/mapForm";
     }
@@ -118,9 +119,8 @@ public class MapController {
         // login user
         if(user != null){
             model.addAttribute("userName", user.getName());
+            mapService.saveNewMap(mapForm, user.getEmail());
         }
-
-        mapService.processNewMap(mapForm);
 
         return "redirect:/userMap";
     }

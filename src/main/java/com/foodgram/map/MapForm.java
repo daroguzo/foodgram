@@ -5,8 +5,6 @@ import lombok.Data;
 @Data
 public class MapForm {
 
-    private String userEmail;
-
     private String title;
 
     private String content;
