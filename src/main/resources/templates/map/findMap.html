@@ -14,7 +14,7 @@
             <label class="sr-only" for="search_input">장소</label>
             <input id="search_input" placeholder="장소를 입력해주세요"/>
             <button id="search_button" class="btn btn-default">검색</button>
-            <form id="mapForm" th:action="@{/findMap}" th:object="${mapForm}" th:method="post">
+            <form class="form-inline" id="mapForm" th:action="@{/findMap}" th:object="${mapForm}" th:method="post">
                 <div class="form-group">
                     <label class="sr-only" for="title">지역</label>
                     <input type="hidden" id="title" class="form-control" th:field="*{title}">
@@ -36,7 +36,7 @@
                     <input type="hidden" id="lng" class="form-control" th:field="*{lng}">
                 </div>
 <!--                <button id="submit_button" class="btn btn-primary">추가</button>-->
-                <button type="submit" class="btn btn-default">제출</button>
+                <button type="submit" class="btn btn-primary">제출</button>
             </form>
         </div>
 
