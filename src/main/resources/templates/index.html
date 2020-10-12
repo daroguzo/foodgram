@@ -5,25 +5,53 @@
 <body>
     <nav th:replace="fragments.html :: navbar"></nav>
 
-    <!-- 목록 출력 영역 -->
-    <table class="table table-horizontal table-bordered">
-        <thead class="thead-strong">
-        <tr>
-            <th>게시글 번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>최종수정일</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        <tr th:each="post: ${post}">
-            <td th:text="${post.id}"></td>
-            <td> <a th:href="@{'/post/update/' + ${post.id}}" th:text="${post.title}"></a></td>
-            <td th:text="${post.author}"></td>
-            <td th:text="${post.modifiedDate}"></td>
-        </tr>
-        </tbody>
-    </table>
+<!--    &lt;!&ndash; 목록 출력 영역 &ndash;&gt;-->
+<!--    <table class="table table-horizontal table-bordered">-->
+<!--        <thead class="thead-strong">-->
+<!--        <tr>-->
+<!--            <th>게시글 번호</th>-->
+<!--            <th>제목</th>-->
+<!--            <th>작성자</th>-->
+<!--            <th>최종수정일</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody id="tbody">-->
+<!--        <tr th:each="post: ${post}">-->
+<!--            <td th:text="${post.id}"></td>-->
+<!--            <td> <a th:href="@{'/post/update/' + ${post.id}}" th:text="${post.title}"></a></td>-->
+<!--            <td th:text="${post.author}"></td>-->
+<!--            <td th:text="${post.modifiedDate}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="text-center"><em><strong>foodgram</strong></em></h1>
+                <p class="lead text-center">
+                    foodgram으로 자신만의 장소를 추가하고 친구들과 공유해보세요.
+                </p>
+                <hr class="my-2">
+
+                <p class="lead text-center">
+                    <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                    나의 지도
+                </p>
+
+                <p class="lead text-center">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    장소 추가하기
+                </p>
+
+                <p class="lead text-center">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    사용자 메뉴
+                </p>
+
+
+            </div>
+        </div>
+    </div>
 
     <footer th:replace="fragments.html :: footer"></footer>
 </body>

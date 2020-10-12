@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="content">지역</label>
-                        <input type="text" id="content" class="form-control" name="content" th:value="${content}">
+                        <input type="text" id="content" class="form-control" name="content" th:value="${content}" readonly>
                     </div>
 <!--                    <div class="form-group">-->
 <!--                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">-->
@@ -34,15 +34,15 @@
 <!--                    </div>-->
                     <div class="form-group">
                         <label for="date">현재 날짜</label>
-                        <input type="text" id="date" class="form-control" name="date" th:value="${date}">
+                        <input type="text" id="date" class="form-control" name="date" th:value="${date}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="lat">위도</label>
-                        <input type="text" id="lat" class="form-control" name="lat" th:value="${lat}">
+                        <input type="text" id="lat" class="form-control" name="lat" th:value="${lat}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="lng">경도</label>
-                        <input type="text" id="lng" class="form-control" name="lng" th:value="${lng}">
+                        <input type="text" id="lng" class="form-control" name="lng" th:value="${lng}" readonly>
                     </div>
                     <button id="submit_button" class="btn btn-primary pull-right">추가</button>
                 </form>
