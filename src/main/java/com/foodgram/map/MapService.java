@@ -29,6 +29,7 @@ public class MapService {
                 .user(user)
                 .title(mapForm.getTitle())
                 .content(mapForm.getContent())
+                .date(mapForm.getDate())
                 .lat(mapForm.getLat())
                 .lng(mapForm.getLng())
                 .build();

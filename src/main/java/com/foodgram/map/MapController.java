@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,29 +39,6 @@ public class MapController {
             List<Map> mapList = mapService.replaceMap(userMap);
             model.addAttribute("mapList", mapList);
         }
-
-//        List<Map> mapList = mapService.getUserMapList(user.getEmail());
-
-//        List<Map> mapList = mapRepository.findByUser(nowUser);
-//        List<Map> mapList = new ArrayList<>();
-
-//        Map map = Map.builder()
-//                .content("김포공항")
-//                .title("인천")
-//                .lat(37.5589508457596)
-//                .lng(126.802874569181)
-////                .user(userRepository.findByEmail(user.getEmail()).orElseThrow(IllegalArgumentException::new))
-//                .build();
-//        Map map2 = Map.builder()
-//                .content("한울마을")
-//                .title("파주")
-//                .lat(37.70854681503891)
-//                .lng(126.74471475004465)
-////                .user(userRepository.findByEmail(user.getEmail()).orElseThrow(IllegalArgumentException::new))
-//                .build();
-//
-//        mapList.add(map);
-//        mapList.add(map2);
         return "map/userMap";
     }
 
@@ -103,9 +82,15 @@ public class MapController {
             model.addAttribute("userName", user.getName());
         }
 
+        // now date
+        LocalDateTime now = LocalDateTime.now();
+        String yyyyMMdd = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(yyyyMMdd);
+
         model.addAttribute(new MapForm());
         model.addAttribute("title", title);
         model.addAttribute("content", content);
+        model.addAttribute("date", yyyyMMdd);
         model.addAttribute("lat", lat);
         model.addAttribute("lng", lng);
 
