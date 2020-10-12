@@ -14,10 +14,10 @@
             <label class="sr-only" for="search_input">장소</label>
             <input id="search_input" placeholder="장소를 입력해주세요"/>
             <button id="search_button" class="btn btn-default">검색</button>
-            <form class="form-inline" id="mapForm" th:action="@{/findMap}" th:object="${mapForm}" th:method="post">
+            <form class="form-inline" id="mapForm" name="mapForm" th:action="@{/findMap}" th:object="${mapForm}" th:method="post">
                 <div class="form-group">
                     <label class="sr-only" for="title">지역</label>
-                    <input type="hidden" id="title" class="form-control" th:field="*{title}">
+                    <input type="hidden" id="title" name="title" class="form-control" th:field="*{title}">
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="content">장소이름</label>
@@ -35,8 +35,7 @@
                     <label class="sr-only" for="lng">경도</label>
                     <input type="hidden" id="lng" class="form-control" th:field="*{lng}">
                 </div>
-<!--                <button id="submit_button" class="btn btn-primary">추가</button>-->
-                <button type="submit" class="btn btn-primary">제출</button>
+                <button type="button" onclick="validCheck()" class="btn btn-primary">추가</button>
             </form>
         </div>
 
@@ -44,8 +43,6 @@
 
         <div id="map" style="width:100%;height:100vh;"></div>
     </div>
-
-<!--    <script type="text/javascript" src="/js/data.js"></script>-->
 
     <script>
         var mapOptions = {
@@ -56,36 +53,6 @@
 
         var markerList = [];
         var infowindowList = [];
-
-        // data.js에서 저장된 marker 가져오기
-        for (var i in data) {
-            var target = data[i];
-            var latlng = new naver.maps.LatLng(target.lat, target.lng);
-            marker = new naver.maps.Marker({
-                map: map,
-                position: latlng,
-                icon: {
-                    content: "<div class='marker'></div>",
-                    anchor: new naver.maps.Point(12, 12)
-                },
-            });
-
-            var content = `<div class='infowindow_wrap'>
-            <div class='infowindow_title'>${target.title}</div>
-            <div class='infowindow_content'>${target.content}</div>
-            <div class='infowindow_date'>${target.date}</div>
-              </div>`
-
-            var infowindow = new naver.maps.InfoWindow({
-                content: content,
-                backgroundColor: "#00ff0000",
-                borderColor: "00ff0000",
-                anchorSize: new naver.maps.Size(0, 0)
-            })
-
-            markerList.push(marker);
-            infowindowList.push(infowindow);
-        }
 
         for (var i = 0, ii = markerList.length; i < ii; i++) {
             // 맵을 클릭하면 ClickMap() 실행
@@ -171,14 +138,17 @@
             ps.keywordSearch(content, placeSearchCB)
         })
 
-        // 검색한 지역 form 추가 하기
-        $("#submit_button").on("click", function (e) {
-            let content = $("#search_input").val();
+        // form null check
+        function validCheck() {
+            let mapForm = document.mapForm;
+            let form = mapForm.title.value;
 
-            // content로 api 요청, 결과물 > placeSubmitForm()를 통해 Post 요청
-            ps.keywordSearch(content, placeSubmitCB)
-            // document.getElementById('mapForm').submit();
-        })
+            if(form.length === 0) {
+                alert("장소 검색 후 추가 가능!");
+            }else {
+                mapForm.submit();
+            }
+        }
 
 
         // data > 결과, status > kakao 서버 상태, pagination 검색 결과가 얼마나 있는 지 번호를 통해 앎
