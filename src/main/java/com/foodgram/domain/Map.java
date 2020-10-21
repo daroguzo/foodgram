@@ -29,12 +29,17 @@ public class Map {
     private Double lng;
 
     @Builder
-    public Map(User user, String title, String content, String date, Double lat, Double lng) {
+    public Map(User user, Long id,  String title, String content, String date, Double lat, Double lng) {
+        this.id = id;
         this.user = user;
         this.title = title;
         this.content = content;
         this.date = date;
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

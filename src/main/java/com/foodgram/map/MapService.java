@@ -22,7 +22,6 @@ public class MapService {
 
     public void saveNewMap(MapForm mapForm, String email) {
 
-//        Optional<User> user = userRepository.findByEmail(mapForm.getUserEmail());
         User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
 
         Map map = Map.builder()
@@ -35,6 +34,15 @@ public class MapService {
                 .build();
 
         mapRepository.save(map);
+    }
+
+    public void modifyMap(MapForm mapForm, Long id) {
+        Map map = mapRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+
+        if (!map.getTitle().equals(mapForm.getTitle())) {
+            map.setTitle(mapForm.getTitle());
+            mapRepository.save(map);
+        }
     }
 
     public List<Map> getUserMapList(String email) {
@@ -50,12 +58,13 @@ public class MapService {
 
         for (Map map : mapList) {
             newMap.add(Map.builder()
-            .title(map.getTitle())
-            .content(map.getContent())
-            .date(map.getDate())
-            .lat(map.getLat())
-            .lng(map.getLng())
-            .build());
+                    .id(map.getId())
+                    .title(map.getTitle())
+                    .content(map.getContent())
+                    .date(map.getDate())
+                    .lat(map.getLat())
+                    .lng(map.getLng())
+                    .build());
         }
 
         return newMap;

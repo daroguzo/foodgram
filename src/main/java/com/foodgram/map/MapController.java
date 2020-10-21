@@ -110,4 +110,39 @@ public class MapController {
         return "redirect:/userMap";
     }
 
+    @GetMapping("/modifyForm")
+    public String getModifyForm(Model model, @LoginUser SessionUser user,
+                             @RequestParam Long mapId) {
+
+        // login user
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
+        Map map = mapRepository.findById(mapId).orElseThrow(IllegalArgumentException::new);
+
+        model.addAttribute(new MapForm());
+        model.addAttribute("mapId", mapId);
+        model.addAttribute("title", map.getTitle());
+        model.addAttribute("content", map.getContent());
+        model.addAttribute("date", map.getDate());
+        model.addAttribute("lat", map.getLat());
+        model.addAttribute("lng", map.getLng());
+
+        return "map/modifyForm";
+    }
+
+    @PostMapping("/modifyForm")
+    public String postModifyForm(Model model, @LoginUser SessionUser user,
+                              MapForm mapForm) {
+
+        // login user
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+            mapService.modifyMap(mapForm, mapForm.getId());
+        }
+
+        return "redirect:/userMap";
+    }
+
 }
