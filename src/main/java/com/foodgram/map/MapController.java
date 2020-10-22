@@ -9,16 +9,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -110,9 +108,9 @@ public class MapController {
         return "redirect:/userMap";
     }
 
-    @GetMapping("/modifyForm")
+    @GetMapping("/modifyForm/{mapId}")
     public String getModifyForm(Model model, @LoginUser SessionUser user,
-                             @RequestParam Long mapId) {
+                             @PathVariable Long mapId) {
 
         // login user
         if(user != null){
