@@ -25,7 +25,7 @@ public class User extends BaseTimeEntity{
 
     private String picture;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Map> mapList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -44,10 +44,20 @@ public class User extends BaseTimeEntity{
         this.name = name;
         this.picture = picture;
 
-        return  this;
+        return this;
     }
 
     public String getRoleKey() {
         return this.role.getKey();
+    }
+
+    public void addMap(Map map) {
+        this.mapList.add(map);
+        map.setUser(this);
+    }
+
+    public void deleteMap(Map map) {
+        this.mapList.remove(map);
+        map.setUser(null);
     }
 }

@@ -5,6 +5,7 @@ import com.foodgram.domain.User;
 import com.foodgram.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,7 @@ public class MapService {
     private final MapRepository mapRepository;
     private final UserRepository userRepository;
 
-//    public void processNewMap(MapForm mapForm) {
-//        saveNewMap(mapForm);
-//    }
-
+    @Transactional
     public void saveNewMap(MapForm mapForm, String email) {
 
         User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
@@ -33,9 +31,11 @@ public class MapService {
                 .lng(mapForm.getLng())
                 .build();
 
+        user.addMap(map);
         mapRepository.save(map);
     }
 
+    @Transactional
     public void modifyMap(MapForm mapForm, Long id) {
         Map map = mapRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
@@ -45,13 +45,7 @@ public class MapService {
         }
     }
 
-    public List<Map> getUserMapList(String email) {
-
-        User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
-
-        return mapRepository.findByUser(user);
-    }
-
+    @Transactional
     public List<Map> replaceMap(List<Map> mapList){
 
         List<Map> newMap = new ArrayList<>();
@@ -68,5 +62,13 @@ public class MapService {
         }
 
         return newMap;
+    }
+
+    @Transactional
+    public void deleteMap(Long mapId, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+        Map map = mapRepository.findById(mapId).orElseThrow(IllegalArgumentException::new);
+        user.deleteMap(map);
+        mapRepository.delete(map);
     }
 }

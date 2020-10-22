@@ -9,10 +9,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
-                <form id="mapForm" th:action="@{/mapForm}" th:object="${mapForm}" th:method="post">
+                <form th:action="@{/modifyForm}" th:object="${mapForm}" th:method="post">
                     <div class="form-group">
                         <label class="sr-only" for="mapId">id</label>
-                        <input type="hidden" id="mapId" class="form-control" name="mapId" th:value="${mapId}">
+                        <input type="hidden" id="mapId" class="form-control" name="id" th:value="${mapId}">
                     </div>
                     <div class="form-group">
                         <label for="title">장소 이름</label>
@@ -34,8 +34,16 @@
                         <label for="lng">경도</label>
                         <input type="text" id="lng" class="form-control" name="lng" th:value="${lng}" readonly>
                     </div>
-                    <button id="submit_button" class="btn btn-primary pull-right">수정</button>
+                    <button class="btn btn-primary pull-left">수정</button>
                 </form>
+                <form id="delete" th:action="@{/modifyForm/delete}" th:object="${mapForm}" th:method="post">
+                    <div class="form-group">
+                        <label class="sr-only" for="deleteId">id</label>
+                        <input type="hidden" id="deleteId" class="form-control" name="id" th:value="${mapId}">
+                    </div>
+                    <button class="btn btn-danger inline pull-right">삭제</button>
+                </form>
+
             </div>
         </div>
     </div>

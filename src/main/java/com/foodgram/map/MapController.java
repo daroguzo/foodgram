@@ -8,10 +8,7 @@ import com.foodgram.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
@@ -138,6 +135,18 @@ public class MapController {
         if(user != null){
             model.addAttribute("userName", user.getName());
             mapService.modifyMap(mapForm, mapForm.getId());
+        }
+
+        return "redirect:/userMap";
+    }
+
+    @PostMapping("/modifyForm/delete")
+    public String deleteMap(Model model, @LoginUser SessionUser user,
+                            MapForm mapForm) {
+        // login user
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+            mapService.deleteMap(mapForm.getId(), user.getEmail());
         }
 
         return "redirect:/userMap";
