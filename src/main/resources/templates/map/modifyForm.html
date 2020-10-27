@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<html th:replace="fragments.html :: mapHead">
-</html>
+<head th:replace="fragments.html :: mapHead">
+</head>
 <body>
     <nav th:replace="fragments.html :: navbar"></nav>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
+        <div class="row justify-content-center">
+            <div class="col-6">
                 <form th:action="@{/modifyForm}" th:object="${mapForm}" th:method="post">
                     <div class="form-group">
                         <label class="sr-only" for="mapId">id</label>
@@ -41,7 +41,7 @@
                         <label class="sr-only" for="deleteId">id</label>
                         <input type="hidden" id="deleteId" class="form-control" name="id" th:value="${mapId}">
                     </div>
-                    <button class="btn btn-danger inline pull-right">삭제</button>
+                    <button class="btn btn-danger float-sm-right">삭제</button>
                 </form>
 
             </div>

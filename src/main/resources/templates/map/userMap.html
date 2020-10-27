@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<html th:replace="fragments.html :: mapHead"></html>
+<head th:replace="fragments.html :: mapHead"></head>
+</html>
 <body>
     <nav th:replace="fragments.html :: navbar"></nav>
 
     <div class="container-fluid">
         <div id="search">
             <input id="search_input" placeholder="목적지를 입력해주세요"/>
-            <button id="search_button">검색</button>
+            <button id="search_button" class="btn btn-info">검색</button>
         </div>
 
         <div id="current">현재 위치</div>
@@ -50,8 +51,8 @@
             <div class='infowindow_title'>${target.title}</div>
             <div class='infowindow_content'>${target.content}</div>
             <div class='infowindow_date'>${target.date}</div>
-            <div class="row center-block">
-                <a class="btn btn-primary pull-right" href="/modifyForm/${target.id}">수정</a>
+            <div class="row">
+                <a class="btn btn-primary text-right" href="/modifyForm/${target.id}">수정</a>
             </div>
               </div>`
 

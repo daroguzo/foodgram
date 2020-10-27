@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<html th:replace="fragments.html :: mapHead">
+<head th:replace="fragments.html :: mapHead">
 <!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 <!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>-->
 <!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>-->
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />-->
 <!--    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />-->
-</html>
+</head>
 <body>
     <nav th:replace="fragments.html :: navbar"></nav>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
+        <div class="row justify-content-center">
+            <div class="col-6">
                 <form id="mapForm" th:action="@{/mapForm}" th:object="${mapForm}" th:method="post">
                     <div class="form-group">
                         <label for="title">장소 이름</label>
@@ -35,7 +35,7 @@
                         <label for="lng">경도</label>
                         <input type="text" id="lng" class="form-control" name="lng" th:value="${lng}" readonly>
                     </div>
-                    <button id="submit_button" class="btn btn-primary pull-right">추가</button>
+                    <button id="submit_button" class="btn btn-primary float-sm-right">추가</button>
                 </form>
             </div>
         </div>
