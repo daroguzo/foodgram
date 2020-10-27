@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+    <nav th:replace="fragments.html :: navbar"></nav>
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-xs-4">
+                <h3 class="text-primary"><em>나의 정보</em></h3>
+                <img th:src="${userPicture}" alt="userPicture" height="300">
+            </div>
+            <div class="col-xs-8 text-left">
+                <h4 class="text-muted">이메일</h4>
+                <p class="lead"><span th:text="${userEmail}"></span> </p>
+
+                <h4 class="text-muted">이름</h4>
+                <p class="lead"><span th:text="${userName}"></span> </p>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragments.html :: footer"></footer>
+</body>
+</html>
