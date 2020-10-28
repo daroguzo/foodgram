@@ -33,18 +33,25 @@
                         <input type="text" id="lng" class="form-control" name="lng" th:value="${lng}" readonly>
                     </div>
                     <button class="btn btn-primary pull-left">수정</button>
+                    <button type="button" onclick="deleteButton()" class="btn btn-danger float-sm-right">삭제</button>
                 </form>
-                <form id="delete" th:action="@{/modifyForm/delete}" th:object="${mapForm}" th:method="post">
+                <form id="deleteForm" name="deleteForm" th:action="@{/modifyForm/delete}" th:object="${mapForm}" th:method="post">
                     <div class="form-group">
                         <label class="sr-only" for="deleteId">id</label>
                         <input type="hidden" id="deleteId" class="form-control" name="id" th:value="${mapId}">
                     </div>
-                    <button class="btn btn-danger float-sm-right">삭제</button>
                 </form>
 
             </div>
         </div>
     </div>
+    <script>
+        // form null check
+        function deleteButton() {
+            let deleteForm = document.deleteForm;
+            deleteForm.submit();
+        }
+    </script>
 
     <footer th:replace="fragments.html :: footer"></footer>
 
