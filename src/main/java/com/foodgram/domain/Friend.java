@@ -1,0 +1,32 @@
+package com.foodgram.domain;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Getter
+@NoArgsConstructor
+@Entity
+public class Friend {
+
+    @Id @GeneratedValue
+    private Long id;
+
+    private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Builder
+    public Friend(String email, User user) {
+        this.email = email;
+        this.user = user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+}

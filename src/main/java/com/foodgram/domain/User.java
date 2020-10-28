@@ -28,6 +28,9 @@ public class User extends BaseTimeEntity{
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Map> mapList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Friend> friends = new ArrayList<>();
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -59,5 +62,15 @@ public class User extends BaseTimeEntity{
     public void deleteMap(Map map) {
         this.mapList.remove(map);
         map.setUser(null);
+    }
+
+    public void addFried(Friend friend) {
+        this.friends.add(friend);
+        friend.setUser(this);
+    }
+
+    public void deleteFriend(Friend friend) {
+        this.friends.remove(friend);
+        friend.setUser(null);
     }
 }

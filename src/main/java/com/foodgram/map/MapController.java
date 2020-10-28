@@ -80,7 +80,6 @@ public class MapController {
         // now date
         LocalDateTime now = LocalDateTime.now();
         String yyyyMMdd = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        System.out.println(yyyyMMdd);
 
         model.addAttribute(new MapForm());
         model.addAttribute("title", title);
