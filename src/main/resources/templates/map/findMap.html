@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments.html :: mapHead"></head>
 <style>
     button{
         display: inline;
     }
 </style>
-</html>
 <body>
     <nav th:replace="fragments.html :: navbar"></nav>
 
@@ -38,7 +36,6 @@
                     <label class="sr-only" for="lng">경도</label>
                     <input type="hidden" id="lng" class="form-control" th:field="*{lng}">
                 </div>
-<!--                <button type="button" onclick="validCheck()" class="btn btn-success">추가</button>-->
             </form>
         </div>
 
