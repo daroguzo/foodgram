@@ -46,8 +46,8 @@
 
     <script>
         var mapOptions = {
-            center: new naver.maps.LatLng(37.3595704, 127.105399),
-            zoom: 10
+            center: new naver.maps.LatLng(37.559902, 126.975302),
+            zoom: 12
         };
         var map = new naver.maps.Map('map', mapOptions);
 
@@ -110,7 +110,7 @@
                     }
 
                     // zoom
-                    map.setZoom(14, false);
+                    map.setZoom(17, false);
                     map.panTo(latlng);
                 });
             } else {
@@ -176,7 +176,7 @@
                     pre_marker[0].setMap(null);
                 }
                 // 목적지 zoom
-                map.setZoom(14, false);
+                map.setZoom(17, false);
                 map.panTo(latlng);
 
                 document.getElementById('title').value = place_name;
