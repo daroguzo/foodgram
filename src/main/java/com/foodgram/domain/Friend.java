@@ -14,6 +14,8 @@ public class Friend {
     @Id @GeneratedValue
     private Long id;
 
+    private String name;
+
     private String email;
 
     @ManyToOne
@@ -21,7 +23,8 @@ public class Friend {
     private User user;
 
     @Builder
-    public Friend(String email, User user) {
+    public Friend(String name, String email, User user) {
+        this.name = name;
         this.email = email;
         this.user = user;
     }
