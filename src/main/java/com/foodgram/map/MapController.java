@@ -151,4 +151,18 @@ public class MapController {
         return "redirect:/userMap";
     }
 
+    @PostMapping("/friendMap")
+    public String getFriendMap(Model model, @LoginUser SessionUser user, @RequestParam String email ) {
+
+        // login user
+        if(user != null){
+            model.addAttribute("userName", user.getName() + "님의 친구 " + email + "의 지도");
+            User friend = userRepository.findByEmail(email).orElseThrow(IllegalArgumentException::new);
+            List<Map> userMap = mapRepository.findByUser(friend);
+            List<Map> mapList = mapService.replaceMap(userMap);
+            model.addAttribute("mapList", mapList);
+        }
+        return "map/friendMap";
+    }
+
 }

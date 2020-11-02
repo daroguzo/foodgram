@@ -27,7 +27,7 @@
                         <td>
                             <form id="map" th:action="@{/friendMap}" th:method="post">
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" name="id" th:value="${friend.id}">
+                                    <input type="hidden" class="form-control" name="email" th:value="${friend.email}">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm">지도</button>
                             </form>
