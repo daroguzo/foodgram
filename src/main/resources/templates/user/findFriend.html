@@ -12,12 +12,12 @@
                 <div th:if="${message}" class="alert alert-success" role="alert">
                     <span th:text="${message}"></span>
                 </div>
-                <form th:action="@{/findFriend}" th:method="post">
+                <form  th:action="@{/findFriend}" th:method="post">
                     <div class="form-group">
                         <label for="email">이메일로 찾기</label>
                         <input type="text" id="email" class="form-control-lg" name="email">
                     </div>
-                    <button type="submit" class="btn btn-primary float-sm-right">찾기</button>
+                    <button type="submit" class="btn btn-primary float-sm-right">추가</button>
                 </form>
             </div>
         </div>
