@@ -12,6 +12,8 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
 
     List<Friend> findByUser(User user);
 
+    Optional<Friend> findById(Long id);
+
     boolean existsByEmail(String email);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class UserController {
             User nowUser = userRepository.findByEmail(user.getEmail()).orElseThrow(IllegalArgumentException::new);
             List<Friend> friendList = friendRepository.findByUser(nowUser);
             model.addAttribute("friendList", friendList);
-            model.addAttribute(new friendForm());
+            model.addAttribute(new FriendForm());
             if (friendList.size() == 0) {
                 model.addAttribute("errorMessage", "등록 친구가 없습니다!");
             }
@@ -54,8 +55,39 @@ public class UserController {
         // login user
         if(user != null){
             model.addAttribute("userName", user.getName());
+            userService.deleteFriend(id, user.getEmail());
         }
 
         return "redirect:/friendList";
+    }
+
+    @GetMapping("/findFriend")
+    public String getFindFriend(Model model, @LoginUser SessionUser user) {
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "user/findFriend";
+    }
+
+    @PostMapping("/findFriend")
+    public String postFindFriend(Model model, @LoginUser SessionUser user, @RequestParam String email,
+                                 RedirectAttributes redirectAttributes) {
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+            if (userService.isExistUser(email)) {
+                Friend friend = userService.findFriend(email);
+                User nowUser = userRepository.findByEmail(user.getEmail()).orElseThrow(IllegalArgumentException::new);
+                nowUser.addFried(friend);
+                redirectAttributes.addFlashAttribute("message", "친구 추가 완료!");
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage", "해당 이메일을 사용하는 사용자가 없습니다!");
+            }
+        }
+
+
+        return "redirect:/findFriend";
     }
 }

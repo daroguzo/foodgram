@@ -22,14 +22,14 @@
                     <tbody>
                     <tr th:each="friend : ${friendList}">
                         <th scope="row"></th>
-                        <td th:text="${friend.user}"></td>
+                        <td th:text="${friend.name}"></td>
                         <td th:text="${friend.email}"></td>
                         <td>
-                            <form id="map" th:action="@{/friendList}" th:method="post">
+                            <form id="map" th:action="@{/friendMap}" th:method="post">
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="id" th:value="${friend.id}">
                                 </div>
-                                <button type="submit" class="btn btn-primary">지도</button>
+                                <button type="submit" class="btn btn-primary btn-sm">지도</button>
                             </form>
                         </td>
                         <td>
@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="id" th:value="${friend.id}">
                                 </div>
-                                <button type="submit" class="btn btn-danger">삭제</button>
+                                <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                             </form>
                         </td>
                     </tr>

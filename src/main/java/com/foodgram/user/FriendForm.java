@@ -3,7 +3,7 @@ package com.foodgram.user;
 import lombok.Data;
 
 @Data
-public class friendForm {
+public class FriendForm {
 
     private Long id;
 
