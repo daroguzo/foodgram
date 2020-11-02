@@ -9,9 +9,6 @@
             <input id="search_input" placeholder="목적지를 입력해주세요"/>
             <button id="search_button" class="btn btn-info">검색</button>
         </div>
-
-        <div id="current">현재 위치</div>
-
         <div id="map" style="width:100%;height:100vh;"></div>
     </div>
 
@@ -94,37 +91,6 @@
 
         // currentMarker 1회만 사용 제한할 변수
         let currentUse = true;
-
-        // 현재 위치 클릭
-        $('#current').click(() => {
-            if ('geolocation' in navigator) {
-                // 현재 위치 가져오기
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    // 현재 위치 표시 marker
-                    const latlng = new naver.maps.LatLng(lat, lng);
-                    // currentMarker는 최초 1회만 사용
-                    if (currentUse) {
-                        marker = new naver.maps.Marker({
-                            map: map,
-                            position: latlng,
-                            icon: {
-                                content: '<img class="pulse" draggable="false" unselectable="on" src="/images/circle.png">',
-                                anchor: new naver.maps.Point(11, 11),
-                            }
-                        });
-                        currentUse = false;
-                    }
-
-                    // zoom
-                    map.setZoom(17, false);
-                    map.panTo(latlng);
-                });
-            } else {
-                alert("위치 정보 사용 불가능");
-            }
-        });
 
         // 목적지 검색 kakao api
         let ps = new kakao.maps.services.Places();
