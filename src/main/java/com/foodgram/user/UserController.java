@@ -77,6 +77,17 @@ public class UserController {
 
         if(user != null){
             model.addAttribute("userName", user.getName());
+
+            if (userService.cantAddMe(user.getEmail(), email)) {
+                redirectAttributes.addFlashAttribute("errorMessage", "자신을 친구로 추가할 수 없습니다.");
+                return "redirect:/findFriend";
+            }
+
+            if (userService.isDuplicatedFriend(user.getEmail(), email)) {
+                redirectAttributes.addFlashAttribute("errorMessage", "친구로 이미 등록되어 있습니다.");
+                return "redirect:/findFriend";
+            }
+
             if (userService.isExistUser(email)) {
                 Friend friend = userService.findFriend(email);
                 User nowUser = userRepository.findByEmail(user.getEmail()).orElseThrow(IllegalArgumentException::new);

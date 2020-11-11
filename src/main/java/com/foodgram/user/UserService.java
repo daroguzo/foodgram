@@ -1,11 +1,12 @@
 package com.foodgram.user;
 
 import com.foodgram.domain.Friend;
-import com.foodgram.domain.Map;
 import com.foodgram.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -31,6 +32,23 @@ public class UserService {
                 .build();
         friendRepository.save(friend);
         return friend;
+    }
+
+    @Transactional
+    public boolean isDuplicatedFriend(String userEmail, String friendEmail) {
+        User user = userRepository.findByEmail(userEmail).orElseThrow(IllegalArgumentException::new);
+        List<Friend> friendList = friendRepository.findByUser(user);
+        for (Friend f :
+                friendList) {
+            if (f.getEmail().equals(friendEmail)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean cantAddMe(String userEmail, String friendEmail) {
+        return userEmail.equals(friendEmail);
     }
 
     @Transactional
