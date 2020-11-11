@@ -19,7 +19,7 @@ public class Friend {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @Builder
